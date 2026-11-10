@@ -81,10 +81,31 @@
             color: var(--accent-green);
         }
 
-        h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
-        .meta { font-family: monospace; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem; }
-        h2 { margin-top: 2.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+        h1 { 
+            font-size: 1.8rem; 
+            line-height: 1.2;
+            margin-bottom: 0.5rem; 
+        }
         
+        @media (min-width: 768px) {
+            h1 { font-size: 2.5rem; }
+        }
+
+        .meta { 
+            font-family: monospace; 
+            color: var(--text-muted); 
+            margin-bottom: 2rem; 
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        h2 { 
+            font-size: 1.3rem;
+            margin-top: 2rem; 
+            border-bottom: 1px solid var(--border-color); 
+            padding-bottom: 0.5rem; 
+        }
+
         p { margin-bottom: 1.2rem; text-align: justify; }
         
         .math-block {
@@ -109,12 +130,17 @@
 </head>
 <body>
 
-    <div class="header">
+    <div class="header" data-html2canvas-ignore="true">
         <div class="brand">
             <img src="/logo.png" alt="GMDM Logo">
             <span style="font-family: system-ui; font-weight: bold; color: var(--accent-green);">GMDM</span>
         </div>
-        <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+        
+        <div class="header-actions">
+            <!-- This button triggers the native browser print dialog (Save as PDF) -->
+            <button class="theme-toggle" onclick="window.print()">Download PDF</button>
+            <button class="theme-toggle" onclick="toggleTheme()">Theme</button>
+        </div>
     </div>
 
     <div class="paper-container">
@@ -174,6 +200,23 @@
             <strong>3. Immutable Timestamping (The Validation):</strong> Every data point is saved to a secure database with a precise <code>validated_date</code>. This creates a permanent historical ledger. If a researcher queries the GMDM API on a specific date, the returned dataset is cryptographically tied to the exact CBG publication it was sourced from.
         </p>
 
+        <h3 style="color: var(--accent-green); margin-top: 1.5rem; font-size: 1.2rem;">Mathematical Methodology: The Liquidity Index</h3>
+        <p>
+            To provide a verifiable metric of internal market liquidity, the GMDM extracts the raw volume variables from the CBG auction tables: the <strong>Amount Floated</strong> (the total volume offered by the Central Bank) and the <strong>Amount Applied</strong> (the total volume bid by the market).
+        </p>
+        <p>
+            We calculate the Liquidity Ratio (L<sub>r</sub>) using the following formula:
+        </p>
+        <div class="math-block">
+            L<sub>r</sub> = (Amount Applied / Amount Floated) × 100
+        </div>
+        <p>
+            This ratio provides a mathematical snapshot of the Dalasi's internal liquidity:
+        </p>
+        <ul>
+            <li><strong>L<sub>r</sub> &gt; 100% (Oversubscription):</strong> The market applied for more capital than was offered. This indicates high liquidity in the banking system and strong demand for sovereign paper. It is visually represented in green on the dashboard.</li>
+            <li><strong>L<sub>r</sub> &lt; 100% (Undersubscription):</strong> The market failed to apply for the full amount offered. This indicates a tightening of liquidity or a lack of demand at the specified yield. It is visually represented in red.</li>
+        </ul>
         <h2>4. Open Invitation for Academic Improvement</h2>
         <p>
             The GMDM is an open-source instrument. Because the data is structured and entirely factual, it is designed to be improved upon.

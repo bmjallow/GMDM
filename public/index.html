@@ -5,128 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GMDM - Gambia Macro Debt Monitor</title>
     <link rel="icon" type="image/png" href="/logo.png">
-    <style>
-        :root {
-            /* Dark Theme (Default) */
-            --bg-color: #0b120e;
-            --card-bg: #15231b;
-            --text-main: #f0fdf4;
-            --text-muted: #86efac;
-            --accent-green: #4ade80;
-            --border-color: #166534;
-        }
-
-        [data-theme="light"] {
-            /* Light Theme */
-            --bg-color: #f0fdf4;
-            --card-bg: #ffffff;
-            --text-main: #064e3b;
-            --text-muted: #047857;
-            --accent-green: #16a34a;
-            --border-color: #bbf7d0;
-        }
-
-        body { 
-            font-family: system-ui, -apple-system, sans-serif; 
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
-            padding: 2rem; 
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .brand img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-        }
-
-        .brand h1 {
-            margin: 0;
-            font-size: 1.5rem;
-            color: var(--accent-green);
-        }
-
-        .theme-toggle {
-            background: var(--card-bg);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-                .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .btn-link {
-            background: var(--card-bg);
-            color: var(--accent-green);
-            border: 1px solid var(--border-color);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: opacity 0.2s;
-        }
-
-        .btn-link:hover {
-            opacity: 0.8;
-        }
-
-        .card { 
-            background: var(--card-bg); 
-            padding: 1.5rem; 
-            border-radius: 8px; 
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2); 
-        }
-
-        .status { 
-            color: var(--accent-green); 
-            font-size: 0.9rem; 
-            font-weight: bold; 
-            margin-bottom: 1rem; 
-            display: block;
-        }
-
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin-top: 1rem; 
-        }
-
-        th, td { 
-            text-align: left; 
-            padding: 0.75rem; 
-            border-bottom: 1px solid var(--border-color); 
-        }
-
-        th { 
-            color: var(--text-muted); 
-            text-transform: uppercase; 
-            font-size: 0.8rem; 
-            letter-spacing: 0.05em; 
-        }
-
-        .loading { color: var(--text-muted); }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 
@@ -141,64 +21,52 @@
         </div>
     </div>
 
-    <div class="card">
-        <span class="status" id="status">Connecting to API...</span>
-        <table>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Tenor</th>
-                    <th>Yield (%)</th>
-                    <th>Validated At</th>
-                </tr>
-            </thead>
-            <tbody id="data-body">
-                <tr><td colspan="5" class="loading">Loading data...</td></tr>
-            </tbody>
-        </table>
+    <div class="dashboard-grid">
+        <!-- Chart Card -->
+        <div class="card">
+            <h2 style="color: var(--accent-green); font-size: 1.1rem; margin-bottom: 0.5rem;">Yield Curve (Latest Auction)</h2>
+            <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 1rem;">
+                Data rendered directly from the Central Bank of The Gambia's official website.
+            </p>
+            <div class="chart-container">
+                <canvas id="yieldChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="card">
+            <span class="status" id="status">Connecting to API...</span>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Tenor</th>
+                        <th>Yield (%)</th>
+                        <th>Validated At</th>
+                    </tr>
+                </thead>
+                <tbody id="data-body">
+                    <tr><td colspan="5" class="loading">Loading data...</td></tr>
+                </tbody>
+            </table>
+        </div>
+                <!-- Liquidity Card -->
+        <div class="card" style="grid-column: 1 / -1;">
+            <h2 style="color: var(--accent-green); font-size: 1.1rem; margin-bottom: 0.5rem;">Liquidity Index (Subscription Rate)</h2>
+            <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 1rem;">
+                Ratio of Amount Applied to Amount Floated. 
+                <span style="color: var(--accent-green); font-weight: bold;">Green (>100%) = High Demand</span> | 
+                <span style="color: #ef4444; font-weight: bold;">Red (<100%) = Low Demand</span>
+            </p>
+            <div id="liquidity-container" style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                <!-- This will be populated by JS -->
+            </div>
+        </div>
     </div>
 
-    <script>
-        // Theme logic
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-
-        function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
-        }
-
-        // Data fetching logic
-        async function fetchData() {
-            try {
-                const response = await fetch('/api/v1/auctions/latest');
-                const result = await response.json();
-                
-                document.getElementById('status').innerText = "API Status: Online & Automated";
-                const tbody = document.getElementById('data-body');
-                
-                if(result.data.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="5" class="loading">No data scraped yet. Awaiting automated cron job.</td></tr>';
-                    return;
-                }
-
-                tbody.innerHTML = result.data.map(row => `
-                    <tr>
-                        <td>${row.auction_date}</td>
-                        <td>${row.security_type}</td>
-                        <td>${row.tenor_days} days</td>
-                        <td>${row.yield_rate.toFixed(2)}%</td>
-                        <td>${new Date(row.validated_date).toLocaleString()}</td>
-                    </tr>
-                `).join('');
-            } catch (e) {
-                document.getElementById('status').innerText = "Error connecting to API.";
-            }
-        }
-        fetchData();
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/charts.js"></script>
+    <script src="/js/api.js"></script>
 </body>
 </html>
