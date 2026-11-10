@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "gmdm",
+  "main": "src/index.ts",
+  "compatibility_date": "2024-03-20",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "GMDM_DB",
+      "database_name": "gmdm-db",
+      "database_id": "1e70fdc6-2fc2-452e-bf9c-f713690b247b"
+    }
+  ],
+  "triggers": {
+    "crons": [
+      "0 6 * * *"
+    ]
+  }
+}

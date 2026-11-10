@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whitepaper - Gambia Macro Debt Monitor</title>
+    <style>
+        :root {
+            --bg-color: #0b120e;
+            --card-bg: #15231b;
+            --text-main: #f0fdf4;
+            --text-muted: #86efac;
+            --accent-green: #4ade80;
+            --border-color: #166534;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f0fdf4;
+            --card-bg: #ffffff;
+            --text-main: #064e3b;
+            --text-muted: #047857;
+            --accent-green: #16a34a;
+            --border-color: #bbf7d0;
+        }
+
+        body { 
+            font-family: 'Georgia', serif; /* Academic feel */
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            padding: 2rem; 
+            line-height: 1.7;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brand img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: system-ui, sans-serif;
+        }
+
+        .paper-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3 {
+            font-family: system-ui, -apple-system, sans-serif;
+            color: var(--accent-green);
+        }
+
+        h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        .meta { font-family: monospace; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem; }
+        h2 { margin-top: 2.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+        
+        p { margin-bottom: 1.2rem; text-align: justify; }
+        
+        .math-block {
+            background: var(--bg-color);
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: monospace;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--accent-green);
+        }
+
+        a { color: var(--accent-green); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-family: system-ui, sans-serif;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="brand">
+            <img src="/logo.png" alt="GMDM Logo">
+            <span style="font-family: system-ui; font-weight: bold; color: var(--accent-green);">GMDM</span>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+    </div>
+
+    <div class="paper-container">
+        <a href="/" class="back-link">← Return to Dashboard</a>
+
+        <h1>The Gambia Macro Debt Monitor (GMDM)</h1>
+        <div class="meta">
+            <strong>Author:</strong> Bubacarr M Jallow<br>
+            <strong>Role:</strong> Independent Researcher, Theoretical Mathematics<br>
+            <strong>Status:</strong> Verifiable Data Architecture (No Projections, No Hypotheses)
+        </div>
+
+        <h2>1. Abstract</h2>
+        <p>
+            In theoretical mathematics, a system can only be understood if its variables are observable. In the context of sovereign macroeconomics, the observable variables are the yields, tenors, and accepted amounts of government securities.
+        </p>
+        <p>
+            Currently, accessing the raw auction data of the Central Bank of The Gambia (CBG) requires manual extraction from interactive web portals. This introduces friction into the data pipeline, hindering independent mathematical analysis.
+        </p>
+        <p>
+            The Gambia Macro Debt Monitor (GMDM) is a serverless, automated data aggregation engine designed to resolve this friction. It functions strictly as a mirror: it extracts raw numbers from the CBG's official website, timestamps them for validation, and visualizes the resulting short-end yield curves and T-Bill/Sukuk spreads.
+        </p>
+        <p>
+            <strong>The GMDM introduces zero projections, zero estimations, and zero hypotheses.</strong> Every data point displayed on the dashboard is a direct mathematical fact, sourced from the official record, and publicly available for independent verification. This paper serves as the documentation for the architecture, the mathematical methodology of the curves, and an invitation to the academic community to utilize this verified dataset for further theoretical and empirical research.
+        </p>
+
+        <h2>2. The Thesis: The Mathematics of Transparency</h2>
+        <p>
+            Financial systems are often obscured by narrative. However, at a fundamental level, the borrowing of a nation is a sequence of discrete mathematical operations. Let the state of the system be defined by three variables:
+        </p>
+        <div class="math-block">
+            T = Tenor (Time in Days)<br>
+            Y = Yield (Cost of Capital %)<br>
+            A = Amount Accepted (Volume in Dalasi)
+        </div>
+        <p>
+            These three variables dictate the liquidity and debt servicing capacity of the state. When this data is locked behind web firewalls or buried in PDF documents, it cannot be modeled. 
+        </p>
+        <p>
+            The thesis of the GMDM is that <strong>sovereign debt data should be treated as a continuous, machine-readable function.</strong> By building an automated edge-computing pipeline, we transform discrete, static web pages into a structured, time-series database.
+        </p>
+        <p>
+            This is not a platform for financial advice or political commentary. It is a mathematical instrument. It provides the raw coordinates required to analyze the curvature of The Gambia's debt profile. Any researcher, mathematician, or economist can take the raw JSON data produced by this API and independently verify it against the official records.
+        </p>
+
+        <h2>3. Methodology: The Verifiable Pipeline</h2>
+        <p>
+            To ensure absolute mathematical integrity, the GMDM architecture is built on three strict rules:
+        </p>
+        <p>
+            <strong>1. Direct Rendering (The Extraction):</strong> The system does not rely on third-party data aggregators. It utilizes serverless browser rendering to interface directly with the Central Bank's official website, extracting the exact figures published in their official auction tables.
+        </p>
+        <p>
+            <strong>2. Deterministic Parsing (The Computation):</strong> Once the raw structure is retrieved, a deterministic Regular Expression algorithm isolates the exact yields and accepted amounts. There is no "fuzzy" AI or estimation. The string "3.64" is mathematically mapped to the 91-Day T-Bill variable.
+        </p>
+        <p>
+            <strong>3. Immutable Timestamping (The Validation):</strong> Every data point is saved to a secure database with a precise <code>validated_date</code>. This creates a permanent historical ledger. If a researcher queries the GMDM API on a specific date, the returned dataset is cryptographically tied to the exact CBG publication it was sourced from.
+        </p>
+
+        <h2>4. Open Invitation for Academic Improvement</h2>
+        <p>
+            The GMDM is an open-source instrument. Because the data is structured and entirely factual, it is designed to be improved upon.
+        </p>
+        <p>
+            Fellow researchers, mathematicians, and economists are invited to:
+        </p>
+        <ul>
+            <li><strong>Fork the Architecture:</strong> Improve the data parsing algorithms or propose alternative mathematical visualizations.</li>
+            <li><strong>Use the Data:</strong> Utilize the GMDM API to run regressions on the crowding-out effect of sovereign debt, analyze the liquidity premium between conventional T-Bills and Sukuk-Al-Salaam, or model the term structure of The Gambian Dalasi.</li>
+            <li><strong>Verify Everything:</strong> The raw data is your baseline. Check the numbers against the CBG's official website at any time.</li>
+        </ul>
+
+        <h2>5. API Access for Researchers</h2>
+        <p>
+            The data pipeline is exposed via a public REST API. No authentication is required.
+        </p>
+        <div class="math-block">
+            GET /api/v1/auctions/latest
+        </div>
+        <p>
+            This endpoint returns a JSON array of the latest verified auction data, including the <code>auction_date</code>, <code>security_type</code>, <code>tenor_days</code>, <code>yield_rate</code>, and the <code>validated_date</code>.
+        </p>
+
+    </div>
+
+    <script>
+        // Theme logic
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        }
+    </script>
+</body>
+</html>
