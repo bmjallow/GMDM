@@ -5,225 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whitepaper - Gambia Macro Debt Monitor</title>
     <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="stylesheet" href="/css/styles.css">
     <style>
-        :root {
-            --bg-color: #0b120e;
-            --card-bg: #15231b;
-            --text-main: #f0fdf4;
-            --text-muted: #86efac;
-            --accent-green: #4ade80;
-            --border-color: #166534;
-        }
-
-        [data-theme="light"] {
-            --bg-color: #f0fdf4;
-            --card-bg: #ffffff;
-            --text-main: #064e3b;
-            --text-muted: #047857;
-            --accent-green: #16a34a;
-            --border-color: #bbf7d0;
-        }
-
-        body { 
-            font-family: 'Georgia', serif; /* Academic feel */
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
-            padding: 2rem; 
-            line-height: 1.7;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .brand img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
-
-        .theme-toggle {
-            background: var(--card-bg);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            font-family: system-ui, sans-serif;
-        }
-
+        /* Whitepaper Specific Overrides */
+        body { font-family: 'Georgia', serif; line-height: 1.7; }
         .paper-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            padding: 3rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
+            max-width: 800px; margin: 0 auto; background: var(--card-bg);
+            padding: 3rem; border-radius: 8px; border: 1px solid var(--border-color);
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-
-        h1, h2, h3 {
-            font-family: system-ui, -apple-system, sans-serif;
-            color: var(--accent-green);
-        }
-
-        h1 { 
-            font-size: 1.8rem; 
-            line-height: 1.2;
-            margin-bottom: 0.5rem; 
-        }
-        
-        @media (min-width: 768px) {
-            h1 { font-size: 2.5rem; }
-        }
-
-        .meta { 
-            font-family: monospace; 
-            color: var(--text-muted); 
-            margin-bottom: 2rem; 
-            font-size: 0.85rem;
-            line-height: 1.4;
-        }
-
-        h2 { 
-            font-size: 1.3rem;
-            margin-top: 2rem; 
-            border-bottom: 1px solid var(--border-color); 
-            padding-bottom: 0.5rem; 
-        }
-
+        h1, h2, h3 { font-family: system-ui, -apple-system, sans-serif; color: var(--accent-green); }
+        h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 0.5rem; }
+        .meta { font-family: monospace; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.85rem; line-height: 1.4; }
+        h2 { font-size: 1.3rem; margin-top: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
         p { margin-bottom: 1.2rem; text-align: justify; }
-        
         .math-block {
-            background: var(--bg-color);
-            padding: 1rem;
-            border-radius: 6px;
-            font-family: monospace;
-            margin: 1.5rem 0;
-            border-left: 4px solid var(--accent-green);
+            background: var(--bg-color); padding: 1rem; border-radius: 6px;
+            font-family: monospace; margin: 1.5rem 0; border-left: 4px solid var(--accent-green);
         }
-
-        a { color: var(--accent-green); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 2rem;
-            font-family: system-ui, sans-serif;
-            font-weight: bold;
-        }
+        .back-link { display: inline-block; margin-bottom: 2rem; font-family: system-ui, sans-serif; font-weight: bold; color: var(--accent-green); text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
 
-    <div class="header" data-html2canvas-ignore="true">
+    <div class="header" id="print-header">
         <div class="brand">
             <img src="/logo.png" alt="GMDM Logo">
             <span style="font-family: system-ui; font-weight: bold; color: var(--accent-green);">GMDM</span>
         </div>
-        
         <div class="header-actions">
-            <!-- This button triggers the native browser print dialog (Save as PDF) -->
-            <button class="theme-toggle" onclick="window.print()">Download PDF</button>
+            <button class="theme-toggle" onclick="window.print()">PDF</button>
             <button class="theme-toggle" onclick="toggleTheme()">Theme</button>
         </div>
     </div>
 
     <div class="paper-container">
-        <a href="/" class="back-link">← Return to Dashboard</a>
+        <a href="/" class="back-link" id="print-back-link">← Return to Dashboard</a>
 
         <h1>The Gambia Macro Debt Monitor (GMDM)</h1>
         <div class="meta">
             <strong>Author:</strong> Bubacarr M Jallow<br>
             <strong>Role:</strong> Independent Researcher, Theoretical Mathematics<br>
-            <strong>Status:</strong> Verifiable Data Architecture (No Projections, No Hypotheses)
+            <strong>Status:</strong> Verifiable Data Architecture 
         </div>
 
         <h2>1. Abstract</h2>
-        <p>
-            In theoretical mathematics, a system can only be understood if its variables are observable. In the context of sovereign macroeconomics, the observable variables are the yields, tenors, and accepted amounts of government securities.
-        </p>
-        <p>
-            Currently, accessing the raw auction data of the Central Bank of The Gambia (CBG) requires manual extraction from interactive web portals. This introduces friction into the data pipeline, hindering independent mathematical analysis.
-        </p>
-        <p>
-            The Gambia Macro Debt Monitor (GMDM) is a serverless, automated data aggregation engine designed to resolve this friction. It functions strictly as a mirror: it extracts raw numbers from the CBG's official website, timestamps them for validation, and visualizes the resulting short-end yield curves and T-Bill/Sukuk spreads.
-        </p>
-        <p>
-            <strong>The GMDM introduces zero projections, zero estimations, and zero hypotheses.</strong> Every data point displayed on the dashboard is a direct mathematical fact, sourced from the official record, and publicly available for independent verification. This paper serves as the documentation for the architecture, the mathematical methodology of the curves, and an invitation to the academic community to utilize this verified dataset for further theoretical and empirical research.
-        </p>
+        <p>In theoretical mathematics, a system can only be understood if its variables are observable. In the context of sovereign macroeconomics, the observable variables are the yields, tenors, and accepted amounts of government securities.</p>
+        <p>Currently, accessing the raw auction data of the Central Bank of The Gambia (CBG) requires manual extraction from interactive web portals. This introduces friction into the data pipeline, hindering independent mathematical analysis.</p>
+        <p>The Gambia Macro Debt Monitor (GMDM) is a serverless, automated data aggregation engine designed to resolve this friction. It functions strictly as a mirror: it extracts raw numbers from the CBG's official website, timestamps them for validation, and visualizes the resulting short-end yield curves and T-Bill/Sukuk spreads.</p>
+        <p><strong>The GMDM introduces zero projections, zero estimations, and zero hypotheses.</strong> Every data point displayed on the dashboard is a direct mathematical fact, sourced from the official record, and publicly available for independent verification. This paper serves as the documentation for the architecture, the mathematical methodology of the curves, and an invitation to the academic community to utilize this verified dataset for further theoretical and empirical research.</p>
 
         <h2>2. The Thesis: The Mathematics of Transparency</h2>
-        <p>
-            Financial systems are often obscured by narrative. However, at a fundamental level, the borrowing of a nation is a sequence of discrete mathematical operations. Let the state of the system be defined by three variables:
-        </p>
-        <div class="math-block">
-            T = Tenor (Time in Days)<br>
-            Y = Yield (Cost of Capital %)<br>
-            A = Amount Accepted (Volume in Dalasi)
-        </div>
-        <p>
-            These three variables dictate the liquidity and debt servicing capacity of the state. When this data is locked behind web firewalls or buried in PDF documents, it cannot be modeled. 
-        </p>
-        <p>
-            The thesis of the GMDM is that <strong>sovereign debt data should be treated as a continuous, machine-readable function.</strong> By building an automated edge-computing pipeline, we transform discrete, static web pages into a structured, time-series database.
-        </p>
-        <p>
-            This is not a platform for financial advice or political commentary. It is a mathematical instrument. It provides the raw coordinates required to analyze the curvature of The Gambia's debt profile. Any researcher, mathematician, or economist can take the raw JSON data produced by this API and independently verify it against the official records.
-        </p>
+        <p>Financial systems are often obscured by narrative. However, at a fundamental level, the borrowing of a nation is a sequence of discrete mathematical operations. Let the state of the system be defined by three variables:</p>
+        <div class="math-block">T = Tenor (Time in Days)<br>Y = Yield (Cost of Capital %)<br>A = Amount Accepted (Volume in Dalasi)</div>
+        <p>These three variables dictate the liquidity and debt servicing capacity of the state. When this data is locked behind web firewalls or buried in PDF documents, it cannot be modeled.</p>
+        <p>The thesis of the GMDM is that <strong>sovereign debt data should be treated as a continuous, machine-readable function.</strong> By building an automated edge-computing pipeline, we transform discrete, static web pages into a structured, time-series database.</p>
+        <p>This is not a platform for financial advice or political commentary. It is a mathematical instrument. It provides the raw coordinates required to analyze the curvature of The Gambia's debt profile. Any researcher, mathematician, or economist can take the raw JSON data produced by this API and independently verify it against the official records.</p>
 
         <h2>3. Methodology: The Verifiable Pipeline</h2>
-        <p>
-            To ensure absolute mathematical integrity, the GMDM architecture is built on three strict rules:
-        </p>
-        <p>
-            <strong>1. Direct Rendering (The Extraction):</strong> The system does not rely on third-party data aggregators. It utilizes serverless browser rendering to interface directly with the Central Bank's official website, extracting the exact figures published in their official auction tables.
-        </p>
-        <p>
-            <strong>2. Deterministic Parsing (The Computation):</strong> Once the raw structure is retrieved, a deterministic Regular Expression algorithm isolates the exact yields and accepted amounts. There is no "fuzzy" AI or estimation. The string "3.64" is mathematically mapped to the 91-Day T-Bill variable.
-        </p>
-        <p>
-            <strong>3. Immutable Timestamping (The Validation):</strong> Every data point is saved to a secure database with a precise <code>validated_date</code>. This creates a permanent historical ledger. If a researcher queries the GMDM API on a specific date, the returned dataset is cryptographically tied to the exact CBG publication it was sourced from.
-        </p>
+        <p>To ensure absolute mathematical integrity, the GMDM architecture is built on three strict rules:</p>
+        <p><strong>1. Direct Rendering (The Extraction):</strong> The system does not rely on third-party data aggregators. It utilizes serverless browser rendering to interface directly with the Central Bank's official website, extracting the exact figures published in their official auction tables.</p>
+        <p><strong>2. Deterministic Parsing (The Computation):</strong> Once the raw structure is retrieved, a deterministic Regular Expression algorithm isolates the exact yields and accepted amounts. There is no "fuzzy" AI or estimation. The string "3.64" is mathematically mapped to the 91-Day T-Bill variable.</p>
+        <p><strong>3. Immutable Timestamping (The Validation):</strong> Every data point is saved to a secure database with a precise <code>validated_date</code>. This creates a permanent historical ledger. If a researcher queries the GMDM API on a specific date, the returned dataset is cryptographically tied to the exact CBG publication it was sourced from.</p>
 
         <h3 style="color: var(--accent-green); margin-top: 1.5rem; font-size: 1.2rem;">Mathematical Methodology: The Liquidity Index</h3>
-        <p>
-            To provide a verifiable metric of internal market liquidity, the GMDM extracts the raw volume variables from the CBG auction tables: the <strong>Amount Floated</strong> (the total volume offered by the Central Bank) and the <strong>Amount Applied</strong> (the total volume bid by the market).
-        </p>
-        <p>
-            We calculate the Liquidity Ratio (L<sub>r</sub>) using the following formula:
-        </p>
-        <div class="math-block">
-            L<sub>r</sub> = (Amount Applied / Amount Floated) × 100
-        </div>
-        <p>
-            This ratio provides a mathematical snapshot of the Dalasi's internal liquidity:
-        </p>
+        <p>To provide a verifiable metric of internal market liquidity, the GMDM extracts the raw volume variables from the CBG auction tables: the <strong>Amount Floated</strong> (the total volume offered by the Central Bank) and the <strong>Amount Applied</strong> (the total volume bid by the market).</p>
+        <p>We calculate the Liquidity Ratio (L<sub>r</sub>) using the following formula:</p>
+        <div class="math-block">L<sub>r</sub> = (Amount Applied / Amount Floated) × 100</div>
+        <p>This ratio provides a mathematical snapshot of the Dalasi's internal liquidity:</p>
         <ul>
             <li><strong>L<sub>r</sub> &gt; 100% (Oversubscription):</strong> The market applied for more capital than was offered. This indicates high liquidity in the banking system and strong demand for sovereign paper. It is visually represented in green on the dashboard.</li>
             <li><strong>L<sub>r</sub> &lt; 100% (Undersubscription):</strong> The market failed to apply for the full amount offered. This indicates a tightening of liquidity or a lack of demand at the specified yield. It is visually represented in red.</li>
         </ul>
+        
         <h2>4. Open Invitation for Academic Improvement</h2>
-        <p>
-            The GMDM is an open-source instrument. Because the data is structured and entirely factual, it is designed to be improved upon.
-        </p>
-        <p>
-            Fellow researchers, mathematicians, and economists are invited to:
-        </p>
+        <p>The GMDM is an open-source instrument. Because the data is structured and entirely factual, it is designed to be improved upon.</p>
+        <p>Fellow researchers, mathematicians, and economists are invited to:</p>
         <ul>
             <li><strong>Fork the Architecture:</strong> Improve the data parsing algorithms or propose alternative mathematical visualizations.</li>
             <li><strong>Use the Data:</strong> Utilize the GMDM API to run regressions on the crowding-out effect of sovereign debt, analyze the liquidity premium between conventional T-Bills and Sukuk-Al-Salaam, or model the term structure of The Gambian Dalasi.</li>
@@ -231,15 +89,9 @@
         </ul>
 
         <h2>5. API Access for Researchers</h2>
-        <p>
-            The data pipeline is exposed via a public REST API. No authentication is required.
-        </p>
-        <div class="math-block">
-            GET /api/v1/auctions/latest
-        </div>
-        <p>
-            This endpoint returns a JSON array of the latest verified auction data, including the <code>auction_date</code>, <code>security_type</code>, <code>tenor_days</code>, <code>yield_rate</code>, and the <code>validated_date</code>.
-        </p>
+        <p>The data pipeline is exposed via a public REST API. No authentication is required.</p>
+        <div class="math-block">GET /api/v1/auctions/latest</div>
+        <p>This endpoint returns a JSON array of the latest verified auction data, including the <code>auction_date</code>, <code>security_type</code>, <code>tenor_days</code>, <code>yield_rate</code>, and the <code>validated_date</code>.</p>
 
     </div>
 
@@ -254,6 +106,21 @@
             document.documentElement.setAttribute('data-theme', next);
             localStorage.setItem('theme', next);
         }
+
+        // THE BULLETPROOF PDF FIX: Hide elements physically when printing
+        window.onbeforeprint = function() {
+            const header = document.getElementById('print-header');
+            const backLink = document.getElementById('print-back-link');
+            if (header) header.style.display = 'none';
+            if (backLink) backLink.style.display = 'none';
+        };
+
+        window.onafterprint = function() {
+            const header = document.getElementById('print-header');
+            const backLink = document.getElementById('print-back-link');
+            if (header) header.style.display = 'flex';
+            if (backLink) backLink.style.display = 'inline-block';
+        };
     </script>
 </body>
 </html>
